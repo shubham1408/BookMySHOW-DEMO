@@ -42,7 +42,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         MinLengthValidator(10), validate_integer],
         null=False, unique=True)
     gender = models.PositiveSmallIntegerField(
-        choices=GENDER_CHOICES)
+        choices=GENDER_CHOICES, null=True)
     wallet = models.IntegerField(default=0)
     added_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)

@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 from rest_framework.reverse import reverse
 from rest_framework import status
 from convoapis.models import Movie
-from .models import Movie, Cinema, Shows
+from .models import Movie, Cinema, Shows, UserProfile
 from .choices import BOoK_TICKET_SERIALIZER_ERROR, CSRF_TOKEN
 
 
@@ -14,8 +14,14 @@ class ApiTestCases(TestCase):
     
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_superuser(
-            'admin', 'abc@gmail..com', 'admin')
+        self.user_data = {'password': 'shubh@9028', 'last_login': None, 
+            'is_superuser': True, 'username': 'shubh123', 
+            'email': 'dwivedishubham953@gmail.com', 'name': 'Shubham Dwivedi', 
+            'phone_no': '09540359028', 'gender': 1, 'wallet': 0, 
+            'added_on': datetime.datetime(2020, 4, 3, 13, 6, 43, 402926),
+            'updated_on': datetime.datetime(2020, 4, 5, 9, 58, 34, 508798),
+            'is_staff': True, 'is_active': True}
+        self.user = UserProfile.objects.create(**self.user_data)
         self.movie_data = {
                 'name': 'Tarzan', 'genre': 'Action', 'status': 1,
                 'released_date': datetime.datetime(2020, 4, 1, 0, 0)}
@@ -23,8 +29,8 @@ class ApiTestCases(TestCase):
         self.cinema_data = {
                 'name': 'Pvr Dharm', 'no_of_seats': 100,
                 'no_of_screens': 2, 'city': 'Gurugram',
-                'opening_time': datetime.datetime(2020, 4, 4, 9, 0),
-                'closing_time': datetime.datetime(2020, 4, 4, 23, 30),
+                'opening_time': datetime.datetime.now(),
+                'closing_time': datetime.datetime.now(),
                 'status': 1, 'address': 'Mg road'}
         self.cinema = Cinema.objects.create(**self.cinema_data)
         self.show_data = {
@@ -80,8 +86,7 @@ class ApiTestCases(TestCase):
         """
         Test for seraching all shows by show_time 
         """
-        import ipdb; ipdb.set_trace()
-        self.client.login(username='admin', password='admin')
+        self.client.login(username='shubh123', password='shubh@9028')
         session = self.client.session
         session.save()
         payload = {
