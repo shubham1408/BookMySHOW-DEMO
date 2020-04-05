@@ -60,7 +60,7 @@ class UserListAPI(generics.ListAPIView):
 
 
 
-class MoviesByCity(generics.ListCreateAPIView):
+class MoviesByCity(generics.ListAPIView):
     """
     API to retrieve all movies by city
 
@@ -78,7 +78,7 @@ class MoviesByCity(generics.ListCreateAPIView):
         return movies
 
 
-class CinemasByMovie(generics.ListCreateAPIView):
+class CinemasByMovie(generics.ListAPIView):
     """
     API to retrieve all cinemas by movie name
 
@@ -97,7 +97,7 @@ class CinemasByMovie(generics.ListCreateAPIView):
         return cinemas
 
 
-class ShowTimeSeatAvailaibility(generics.ListCreateAPIView):
+class ShowTimeSeatAvailaibility(generics.ListAPIView):
     """
     API to retrieve all tickets left according to show time
 
