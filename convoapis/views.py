@@ -164,7 +164,6 @@ class BookTicketAPI(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
-        import ipdb; ipdb.set_trace()
         data = request.data.copy()
         data['Show_Time'] = parser.parse(
             request.data['Show_Time']).replace(tzinfo=pytz.UTC)

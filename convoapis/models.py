@@ -135,7 +135,6 @@ class Ticket(models.Model):
         null=False) # Ticket cancellation check
 
     def save(self, *args, **kwargs):
-        import ipdb; ipdb.set_trace()
         return super(Ticket, self).save(*args, **kwargs)    
 
     class Meta:
